@@ -6,4 +6,7 @@
     background-color: grey;
 }
 
-.grid div { }
+.grid div { 
+    height: 40px;
+    width: 40px;
+}
