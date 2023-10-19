@@ -120,6 +120,16 @@ function checkSqaure(square , currentId){
             click(newSquare)
         }
     }, 10)
+    function gameOver(square){
+        alert('BOOM! Game Over!')
+        isGameOver = true
+
+        squares.forEach(square =>{
+            if(square.classList.contains ('bomb')){
+                square.innerHTML = 'suca'
+            }
+        })
+    }
 }
 
 
