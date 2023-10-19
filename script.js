@@ -9,11 +9,8 @@ document.addEventListener('DOMContentLoaded', () => {
     function createBoard() {
 
         const bombsArray = Array(bombAmount).fill('bomb')
-
         const emptyArray = Array(width*width - bombAmount).fill('valid')
-
         const gameArray = emptyArray.concat(bombsArray)
-
         const shuffledArray = gameArray.sort(() => Math.random () -0.5 )
        
  
@@ -23,6 +20,11 @@ document.addEventListener('DOMContentLoaded', () => {
             square.classList.add(shuffledArray[i])
             grid.appendChild(square)
             squares.push(square)
+
+            //click for squares
+            square.addEventListener('click', function(){
+                click(square)
+            })
         }
 
         for (let i = 0; i < squares.length; i++){
@@ -32,31 +34,27 @@ document.addEventListener('DOMContentLoaded', () => {
             
             if (squares[i].classList.contains('valid')){
                 if (i > 0 && !isLeftEdge && squares [i -1].classList.contains('bomb')) total ++
-                if (i > 9 && !isRightEdge  && squares [i +1 -width].classList.contains('bomb')) total ++ 
+                if (i > 9 && !isRightEdge  && squares [i + 1 - width].classList.contains('bomb')) total ++ 
+                if (i > 10 && squares[i - width].classList.contains('bomb')) total ++ 
+                if (i > 11 && !isLeftEdge && squares [i - 1 - width].classList.contains('bomb')) total ++
+                if (i < 98 && !isRightEdge && squares [i + 1].classList.contains('bomb')) total ++
+                if (i < 90 && !isLeftEdge && squares[i -1 + width].classList.contains('bomb')) total ++ 
+                if (i < 88 && !isRightEdge && squares[i + 1 + width].classList.contains('bomb')) total ++
+                if (i < 89 && squares[i +width].classList.contains('bomb')) total ++ 
                 squares[i].setAttribute('data', total)
                 console.log(squares[i])
             }
         
         }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
     }
     createBoard()
+
+
+    //it tells me that the game's over if i press a bomb
+    function click(square) {
+        if (square.classList.contains('bomb')){
+            alert('Game over')
+        }
+    }
 }) 
